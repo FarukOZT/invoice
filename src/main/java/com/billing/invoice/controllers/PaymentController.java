@@ -21,8 +21,8 @@ public class PaymentController {
     @PostMapping("paybill")
     public Payment makeAllPayment3(@RequestParam("userId") Long userId,
                                    @RequestParam("billId") Long billId,
-                                   @RequestParam("walletId") Long walletId){
-        return paymentService.makePayment(userId,billId,walletId);
+                                   @RequestParam("walletId") Long walletId) {
+        return paymentService.makePayment(userId, billId, walletId);
     }
 
 }

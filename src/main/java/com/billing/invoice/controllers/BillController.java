@@ -17,31 +17,33 @@ public class BillController {
     }
 
     @PostMapping("/add")
-    public Bill addBill(@RequestBody Bill bill){
+    public Bill addBill(@RequestBody Bill bill) {
         return billService.addBill(bill);
     }
 
-    @GetMapping("getAllFalse")
+    @GetMapping("/getAllFalse")
     public ResponseEntity<List<Bill>> getAllBillsPaymentFalse(@RequestParam("userId") Long userId) {
         return ResponseEntity.ok(billService.findAllFalse(userId));
     }
+
     @DeleteMapping("/delete/{billId}")
-    public ResponseEntity deleteBill(@PathVariable Long billId){
+    public ResponseEntity deleteBill(@PathVariable Long billId) {
         billService.deleteBill(billId);
         return ResponseEntity.ok("Silindi : " + billId);
     }
 
     @GetMapping("/unpaid")
-    public List<Bill> getUnpaid(@RequestParam("userId") Long userId){
+    public List<Bill> getUnpaid(@RequestParam("userId") Long userId) {
         return billService.unpaid(userId);
     }
 
     @GetMapping("/getAll")
-    public List<Bill> getAllBill(){
+    public List<Bill> getAllBill() {
         return billService.getAllBill();
     }
 
     @GetMapping("/getBillOwnUser")
-    public List<Bill> getBillOwnUser(@RequestParam("userId") Long userId){
+    public List<Bill> getBillOwnUser(@RequestParam("userId") Long userId) {
         return billService.getBillOwnUser(userId);
-    }}
+    }
+}

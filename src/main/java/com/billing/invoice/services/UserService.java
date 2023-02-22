@@ -17,27 +17,30 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public ResponseEntity<User> addUser(User user){
+    public ResponseEntity<User> addUser(User user) {
         user.setUserId(user.getUserId());
         user.setName(user.getName());
         user.setLastName(user.getLastName());
         userRepository.save(user);
         return ResponseEntity.ok(user);
     }
-    public ResponseEntity<User> updateUser(User user){
+
+    public ResponseEntity<User> updateUser(User user) {
         user.setName(user.getName());
         user.setLastName(user.getLastName());
         return ResponseEntity.ok(user);
     }
 
-    public List<User> getAllUser(){
+    public List<User> getAllUser() {
         return userRepository.findAll();
     }
-    public String deleteUser(Long userId){
-         userRepository.deleteById(userId);
-         return "Silindi"+ userId;
+
+    public String deleteUser(Long userId) {
+        userRepository.deleteById(userId);
+        return "Silindi" + userId;
     }
-    public Optional<User> findUser(Long userId){
+
+    public Optional<User> findUser(Long userId) {
         return userRepository.findById(userId);
     }
 

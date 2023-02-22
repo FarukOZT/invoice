@@ -22,7 +22,7 @@ public class BillService {
         this.userService = userService;
     }
 
-    public Bill addBill(Bill bill){
+    public Bill addBill(Bill bill) {
         Bill editBill = new Bill();
         editBill.setPrice(bill.getPrice());
         editBill.setIsPaid(bill.getIsPaid());
@@ -33,45 +33,48 @@ public class BillService {
         return editBill;
     }
 
-    public Optional<Bill> findBill(Long billId){
+    public Optional<Bill> findBill(Long billId) {
         return billRepository.findById(billId);
     }
-    public List<Bill> getAllBill(){
+
+    public List<Bill> getAllBill() {
         return billRepository.findAll();
     }
 
-    public List<Bill> getBillOwnUser(Long userId){
+    public List<Bill> getBillOwnUser(Long userId) {
         return billRepository.findBillOwnUser(userId);
     }
-    public void deleteBill(Long billId){
+
+    public void deleteBill(Long billId) {
         billRepository.deleteById(billId);
     }
-    public List<Bill> findUnpaid(Long userId){
+
+    public List<Bill> findUnpaid(Long userId) {
         List<Bill> find = getBillOwnUser(userId);
         return find.stream().filter((bill -> bill.getIsPaid().equals(false))).collect(Collectors.toList());
     }
 
-    public List<Bill> unpaid(Long userId){
+    public List<Bill> unpaid(Long userId) {
 
         List<Bill> unpaid = findUnpaid(userId);
 
-        if (unpaid.isEmpty()){
+        if (unpaid.isEmpty()) {
             throw new RuntimeException("hepsi odendi");
-        }else {
+        } else {
             return unpaid;
         }
     }
 
-    public List<Bill> findAllFalse(Long userId){
+    public List<Bill> findAllFalse(Long userId) {
         return billRepository.findAllFalseByUserId(userId);
     }
 
-    public void unpaidBills(Long userId){
+    public void unpaidBills(Long userId) {
 
         List<Bill> unpaidBills = findAllFalse(userId);
         if (unpaidBills.isEmpty()) {
             throw new RuntimeException("odenmemis fatura yok");
-        }else {
+        } else {
             unpaidBills.forEach(bill -> {
                 bill.setIsPaid(true);
                 billRepository.save(bill);

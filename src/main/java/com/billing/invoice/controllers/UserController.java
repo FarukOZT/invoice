@@ -25,41 +25,42 @@ public class UserController {
     }
 
     @GetMapping("/getAll")
-        public ResponseEntity<List<User>> getAllUser(){
+    public ResponseEntity<List<User>> getAllUser() {
         return ResponseEntity.ok(userService.getAllUser());
     }
 
     @PostMapping("/add")
-    public ResponseEntity<User> addUser(@RequestBody User user){
+    public ResponseEntity<User> addUser(@RequestBody User user) {
         userService.addUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
 
     @PatchMapping("/update")
-        public ResponseEntity<User> updateUser(@RequestBody User user){
+    public ResponseEntity<User> updateUser(@RequestBody User user) {
         userService.updateUser(user);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(user);
     }
 
     @DeleteMapping("/delete/{userId}")
-        public void deleteUser(@PathVariable("userId") Long userId){
+    public void deleteUser(@PathVariable("userId") Long userId) {
         userService.deleteUser(userId);
     }
 
     @PostMapping("/addBalance")
     public Wallet addBalance(@RequestParam("userId") Long userId,
                              @RequestParam("walletId") Long walletId,
-                             @RequestBody BalanceReq addBalance){
+                             @RequestBody BalanceReq addBalance) {
 
-        return walletService.addBalance(userId,walletId,addBalance);
+        return walletService.addBalance(userId, walletId, addBalance);
     }
+
     @PostMapping("/addWallet")
-    public Wallet addWallet(@RequestBody Wallet wallet){
+    public Wallet addWallet(@RequestBody Wallet wallet) {
         return walletService.addWallet(wallet);
     }
 
     @GetMapping("/getWallet/{walletId}")
-    public Optional<Wallet> getWallet(@PathVariable("walletId") Long walletId){
+    public Optional<Wallet> getWallet(@PathVariable("walletId") Long walletId) {
         return walletService.getWallet(walletId);
     }
 }

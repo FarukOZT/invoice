@@ -22,24 +22,25 @@ public class WalletService {
         this.userRepository = userRepository;
     }
 
-    public Wallet addWallet(Wallet wallet){
+    public Wallet addWallet(Wallet wallet) {
         Wallet newWallet = new Wallet();
         newWallet.setBalance((double) 0);
-        if(userRepository.findById(wallet.getUser().getUserId()).isPresent()){
+        if (userRepository.findById(wallet.getUser().getUserId()).isPresent()) {
             newWallet.setUser(userRepository.getById(wallet.getUser().getUserId()));
             walletRepository.save(newWallet);
         }
         return newWallet;
     }
-    public List<Wallet> getAllWallet(){
+
+    public List<Wallet> getAllWallet() {
         return walletRepository.findAll();
     }
 
-    public Optional<Wallet> getWallet(Long walletId){
+    public Optional<Wallet> getWallet(Long walletId) {
         return walletRepository.findById(walletId);
     }
 
-    public Wallet addBalance(Long userId, Long walletId, BalanceReq balanceReq){
+    public Wallet addBalance(Long userId, Long walletId, BalanceReq balanceReq) {
         Wallet wallet = getWallet(walletId).get();
         balanceReq.setAddBalance(balanceReq.getAddBalance());
         wallet.setBalance(Double.sum(wallet.getBalance(), balanceReq.getAddBalance()));
