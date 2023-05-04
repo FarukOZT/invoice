@@ -1,5 +1,6 @@
 package com.billing.invoice.controllers;
 
+import com.billing.invoice.config.RabbitMQProducer;
 import com.billing.invoice.entity.BalanceReq;
 import com.billing.invoice.entity.User;
 import com.billing.invoice.entity.Wallet;
@@ -19,9 +20,12 @@ public class UserController {
     private final UserService userService;
     private final WalletService walletService;
 
-    public UserController(UserService userService, WalletService walletService) {
+    private final RabbitMQProducer rabbitMQProducer;
+
+    public UserController(UserService userService, WalletService walletService, RabbitMQProducer rabbitMQProducer) {
         this.userService = userService;
         this.walletService = walletService;
+        this.rabbitMQProducer = rabbitMQProducer;
     }
 
     @GetMapping("/getAll")
@@ -50,7 +54,7 @@ public class UserController {
     public Wallet addBalance(@RequestParam("userId") Long userId,
                              @RequestParam("walletId") Long walletId,
                              @RequestBody BalanceReq addBalance) {
-
+        rabbitMQProducer.sendMessage("Yukleme talebiniz alindi");
         return walletService.addBalance(userId, walletId, addBalance);
     }
 
