@@ -26,8 +26,8 @@ public class BillService {
         Bill editBill = new Bill();
         editBill.setPrice(bill.getPrice());
         editBill.setIsPaid(bill.getIsPaid());
-        if (userRepository.findById(bill.getUser().getUserId()).isPresent()) {
-            editBill.setUser(userRepository.getById(bill.getUser().getUserId()));
+        if (userRepository.findById(bill.getUser().getId()).isPresent()) {
+            editBill.setUser(userRepository.getById(bill.getUser().getId()));
         }
         billRepository.save(editBill);
         return editBill;

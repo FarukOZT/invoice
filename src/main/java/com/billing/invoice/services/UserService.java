@@ -18,7 +18,7 @@ public class UserService {
     }
 
     public ResponseEntity<User> addUser(User user) {
-        user.setUserId(user.getUserId());
+        user.setId(user.getId());
         user.setName(user.getName());
         user.setLastName(user.getLastName());
         userRepository.save(user);
@@ -42,6 +42,9 @@ public class UserService {
 
     public Optional<User> findUser(Long userId) {
         return userRepository.findById(userId);
+    }
+    public User findUserByUserName(String userName) {
+        return userRepository.findByUserName(userName);
     }
 
 

@@ -22,8 +22,8 @@ public class BillController {
     }
 
     @GetMapping("/getAllFalse")
-    public ResponseEntity<List<Bill>> getAllBillsPaymentFalse(@RequestParam("userId") Long userId) {
-        return ResponseEntity.ok(billService.findAllFalse(userId));
+    public ResponseEntity<List<Bill>> getAllBillsPaymentFalse(@RequestParam("id") Long id) {
+        return ResponseEntity.ok(billService.findAllFalse(id));
     }
 
     @DeleteMapping("/delete/{billId}")
@@ -33,8 +33,8 @@ public class BillController {
     }
 
     @GetMapping("/unpaid")
-    public List<Bill> getUnpaid(@RequestParam("userId") Long userId) {
-        return billService.unpaid(userId);
+    public List<Bill> getUnpaid(@RequestParam("id") Long id) {
+        return billService.unpaid(id);
     }
 
     @GetMapping("/getAll")
@@ -43,7 +43,7 @@ public class BillController {
     }
 
     @GetMapping("/getBillOwnUser")
-    public List<Bill> getBillOwnUser(@RequestParam("userId") Long userId) {
-        return billService.getBillOwnUser(userId);
+    public List<Bill> getBillOwnUser(@RequestParam("id") Long id) {
+        return billService.getBillOwnUser(id);
     }
 }

@@ -25,8 +25,8 @@ public class WalletService {
     public Wallet addWallet(Wallet wallet) {
         Wallet newWallet = new Wallet();
         newWallet.setBalance((double) 0);
-        if (userRepository.findById(wallet.getUser().getUserId()).isPresent()) {
-            newWallet.setUser(userRepository.getById(wallet.getUser().getUserId()));
+        if (userRepository.findById(wallet.getUser().getId()).isPresent()) {
+            newWallet.setUser(userRepository.getById(wallet.getUser().getId()));
             walletRepository.save(newWallet);
         }
         return newWallet;
